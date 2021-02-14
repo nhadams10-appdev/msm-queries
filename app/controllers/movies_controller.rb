@@ -10,7 +10,6 @@ class MoviesController < ApplicationController
     the_id = params.fetch("an_id")
 
     @the_movie = Movie.where({ :id => the_id }).first
-    #@filmography = Movie.where({ :director_id => the_id })
 
     render({ :template => "movie_templates/details.html.erb"})
   end
