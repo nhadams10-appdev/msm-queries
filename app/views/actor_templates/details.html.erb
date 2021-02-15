@@ -80,7 +80,6 @@
   </tr>
 
   <% @filmography.each do |a_film| %>
-    <% counter = 0 %>
     <tr>
       <td>
         <%= a_film.title %>
@@ -93,7 +92,11 @@
         <%= d.name %>
       </td>
       <td>
-        <%= Character.where({ :actor_id => @the_actor.id }).where({ :movie_id => a_film.id}).at(counter).name %>
+        <% begin %>
+        <%= Character.where({ :actor_id => @the_actor.id }).where({ :movie_id => a_film.id}).first.name %>
+        <% rescue %>
+        <%= p "" %> 
+        <% end%>
       </td>
       <td>
         <a href="/movies/<%= a_film.id %>">
@@ -101,6 +104,5 @@
         </a>
       </td>
     </tr>
-    <% counter = counter + 1 %>
   <% end %>
 </table>
